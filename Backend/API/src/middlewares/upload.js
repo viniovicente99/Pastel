@@ -10,7 +10,7 @@ export const uploadToS3 = async (file) => {
     const upload = new Upload({
         client: s3,
         params: {
-            Bucket: "pastel-app", 
+            Bucket: "bucket-name", 
             Key: `${Date.now()}-${file.originalname}`,
             Body: file.buffer,
         },
