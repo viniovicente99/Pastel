@@ -1,0 +1,78 @@
+<main class="flex flex-col min-h-screen items-center overflow-y-auto bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 px-4">
+
+  
+  <h1
+  *ngIf="posts.length > 0"
+  class="font-bold text-[2rem] leading-snug tracking-tight text-center text-[#ffffff] mt-[4vh] mb-4 tracking-wide max-w-[1000px] min-w-[1000px] pb-4 border-b-2 border--[#ffffff]"
+  >
+  Olá, {{ userName }}
+  </h1>
+
+
+  <h1
+  *ngIf="posts.length > 0"
+  class="font-bold text-[1.5rem] leading-snug tracking-tight text-center text-[#ffffff] mt-2 mb-6 tracking-wide max-w-[1000px] min-w-[1000px]"
+  >
+  Posts Recentes
+  </h1>
+
+  
+  <div
+    *ngIf="posts.length === 0"
+    class="flex w-full min-h-screen justify-center items-center gap-6"
+  >
+    <lucide-icon class="h-[10vw] w-[4vw] text-[#ffffff]" name="file-question-mark"></lucide-icon>
+    <h2 class="text-[1.5rem] text-[#ffffff] tracking-wide">
+      Nenhum Post para mostrar...
+    </h2>
+  </div>
+
+  
+  <div
+    *ngIf="posts.length > 0"
+    class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8 w-full max-w-[1000px] py-10 justify-items-center rounded-lg shadow-[#46115e] shadow-lg"
+  >
+    <a
+      [routerLink]="['/posts/view', post.id]"
+      *ngFor="let post of posts"
+      class="flex flex-col w-[280px] h-[250px] text-left bg-white rounded-lg shadow-[#000000] shadow-lg hover:scale-105 transition-transform duration-300"
+    >
+      
+      <img
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+        [src]="(post?.imageUrls ?? [])[0] || 'https://i.ibb.co/RGbkbXdd/placeholder-png.png'"
+        class="w-full h-[50%] object-cover rounded-t-lg"
+        alt="Imagem do Post"
+      />
+
+      
+      <div class="flex flex-col px-4 mt-2">
+        <h2
+          title="{{ post.title }}"
+          class="font-semibold text-[1.3rem] truncate"
+        >
+          {{ post.title }}
+        </h2>
+        <p
+          title="{{ post.description }}"
+          class="text-[0.9rem] truncate mt-1"
+        >
+          {{ post.description }}
+        </p>
+      </div>
+
+
+      <div class="flex w-full justify-end items-center px-3 ">
+        <p
+          title="{{ post.category }}"
+          class="inline-block mt-[1vh] w-[7vw] p-2 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 rounded-lg font-extrabold text-[0.8rem] text-white truncate text-center overflow-hidden whitespace-nowrap"
+        >
+          {{ post.category }}
+        </p>
+        
+      </div>
+    </a>
+  </div>
+</main>

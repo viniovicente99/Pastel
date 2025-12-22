@@ -1,0 +1,127 @@
+<main class="flex flex-col min-h-screen items-center justify-center overflow-y-auto bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-600">
+
+  <div class="flex justify-center items-center w-full">
+    <form
+      [formGroup]="editPostForm"
+      (ngSubmit)="editPostSubmit()"
+      class="w-full max-w-4xl bg-[#ffffff] text-left rounded-lg shadow-[#000000] shadow-lg">
+
+      <h2 class="font-bold text-[1.8rem] mt-[4vh] px-[5vw]">Editar Postagem</h2>
+
+      <div class="flex flex-col px-[5vw] text-left text-[0.9rem]">
+        <label for="title" class="py-2 font-bold text-[1rem]">Título</label>
+        <div class="flex flex-col justify-center">
+          <input
+            type="text"
+            id="title"
+            formControlName="title"
+            placeholder="Digite aqui o nome da postagem..."
+            class="p-3 h-[3.5vh] w-full mb-2 bg-[transparent] border-b-2 rounded-sm border-[#000000] font-semibold transition duration-200
+            focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+            required>
+          <div *ngIf="isfieldValid('title')" class="flex h-[2vh] items-center p-2 text-[#d60000] text-[0.8rem] font-bold rounded-sm">
+            <h3>Campo obrigatório vazio.</h3>
+          </div>
+          <div *ngIf="titleLength()" class="flex h-[2vh] items-center p-2 text-[#d60000] text-[0.8rem] font-bold rounded-sm">
+            <h3>Campo precisa ter no mínimo 5 caracteres</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-[5vw] flex flex-col text-left text-[0.9rem]">
+        <label for="description" class="py-2 text-[1rem] font-bold">Descrição</label>
+        <div class="flex flex-col justify-center">
+          <input
+            type="text"
+            id="description"
+            formControlName="description"
+            placeholder="Digite aqui um breve resumo do postagem..."
+            class="p-3 h-[3.5vh] w-full mb-2 bg-[transparent] border-b-2 rounded-sm border-[#000000] font-semibold transition duration-200
+            focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+            required>
+          <div *ngIf="isfieldValid('description')" class="flex h-[2vh] items-center p-2 text-[#d60000] text-[0.8rem] font-bold rounded-sm">
+            <h3>Campo obrigatório vazio.</h3>
+          </div>
+          <div *ngIf="descriptionLength()" class="flex h-[2vh] items-center p-2 text-[#d60000] text-[0.8rem] font-bold rounded-sm">
+            <h3>Campo precisa ter no mínimo 5 caracteres.</h3>
+          </div>
+        </div>
+
+        <label for="category" class="py-2 text-[1rem] text-[0.9rem] font-bold">Categoria</label>
+        <div class="flex flex-col justify-center">
+          <input
+            type="text"
+            id="category"
+            formControlName="category"
+            placeholder="Digite aqui o tipo da postagem..."
+            class="p-3 h-[3.5vh] w-full mb-2 bg-[transparent] border-b-2 rounded-sm border-[#000000] font-semibold transition duration-200
+            focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+            required>
+          <div *ngIf="isfieldValid('category')" class="flex h-[2vh] items-center p-2 text-[#d60000] text-[0.8rem] font-bold rounded-sm">
+            <h3>Campo obrigatório vazio.</h3>
+          </div>
+          <div *ngIf="categoryLength()" class="flex h-[2vh] items-center p-2 text-[#d60000] text-[0.8rem] font-bold rounded-sm">
+            <h3>Campo precisa ter no mínimo 2 caracteres e no máximo 20.</h3>
+          </div>
+        </div>
+
+        <label for="content" class="py-2 text-[1rem] font-bold">Conteúdo</label>
+        <div class="flex flex-col">
+          <textarea
+            id="content"
+            formControlName="content"
+            placeholder="Digite aqui todo o conteúdo da postagem..."
+            class="p-3 h-[30vh] w-full mb-2 bg-[transparent] border-b-2 rounded-lg active:border-1 border-[#000000] transition duration-200
+            focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+            required></textarea>
+          <div *ngIf="isfieldValid('content')" class="flex h-[2vh] items-center p-2 text-[#d60000] text-[0.8rem] font-bold rounded-sm">
+            <h3>Campo obrigatório vazio.</h3>
+          </div>
+          <div *ngIf="contentLength()" class="flex h-[2vh] items-center p-2 text-[#d60000] text-[0.8rem] font-bold rounded-sm">
+            <h3>Campo precisa ter no mínimo 5 caracteres.</h3>
+          </div>
+        </div>
+
+
+        <div *ngIf="existingImages.length + selectedImages.length > 0" class="flex mt-2 gap-2 w-full flex-wrap">
+
+
+          <div *ngFor="let imgUrl of existingImages; let i = index" class="relative">
+            <img [src]="imgUrl" class="w-[12vh] h-[8vh] rounded-lg" alt="Preview">
+            <button type="button"
+                    class="absolute top-0 right-0 bg-red-500 text-white font-bold rounded-full w-4 h-4 flex items-center justify-center"
+                    (click)="removeExistingImage(i)">x</button>
+          </div>
+
+
+          <div *ngFor="let file of selectedImages; let i = index" class="relative">
+            <img [src]="getImagePreview(file)" class="w-[12vh] h-[8vh] rounded-lg" alt="Preview">
+            <button type="button"
+                    class="absolute top-0 right-0 bg-red-500 text-white font-bold rounded-full w-4 h-4 flex items-center justify-center"
+                    (click)="removeSelectedImage(i)">x</button>
+          </div>
+
+        </div>
+
+        <div class="h-[5vh] w-[5px] mt-4 justify-start gap-6 items-center">
+          <label for="image-upload" class="cursor-pointer w-[1px] h-[1px] text-[0.9rem] text-black-500">
+            <lucide-icon name="image-up" class="w-[7vh] h-[7vh] hover:scale-110 transition-transform duration-300"></lucide-icon>
+          </label>
+          <input id="image-upload" type="file" (change)="onImageSelected($event)" multiple class="hidden" accept="image/*">
+        </div>
+
+        <div class="flex h-[5vh] justify-end gap-12 items-center">
+          <button routerLink="/posts/my-posts" class="w-[5vh] text-[16px] h-[5vh] mb-8 hover:text-violet-600 rounded-lg font-semibold">
+            Cancelar
+          </button>
+          <button type="button" (click)="openModal('edit')" [disabled]="!post || editPostForm.invalid"
+                  class="w-[14vh] text-[18px] h-[5vh] bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 mb-8
+                  rounded-lg text-[#ffffff] disabled:opacity-50 disabled:cursor-not-allowed font-semibold hover:scale-110 transition-transform duration-300">
+            Editar
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</main>

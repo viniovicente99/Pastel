@@ -1,0 +1,123 @@
+<main class="flex flex-col min-h-screen w-full items-start bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 overflow-y-auto">
+
+    <div class="flex w-[20vw] justify-center">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+
+    <h1 class="text-[4rem] text-center mt-[2vh] tracking-wide" style="font-family: 'Lato', sans-serif; color: #ffffff;">
+    Pastel
+    </h1>
+    </div>
+
+    <div class="flex justify-center min-h-full items-center w-full">
+        <form
+         [formGroup]="registerForm"
+         (ngSubmit)="onSubmit()"
+         class="w-[35vw] py-[3.5vh] bg-white text-center rounded-lg
+                shadow-[#000000] shadow-lg">
+
+            <h2 class="font-bold text-[2.5rem] p-2">Criar conta</h2>
+
+            <h3 class="text-[0.9rem] font-semibold">
+                Digite suas credenciais abaixo para criar uma conta:
+            </h3>
+
+            <div class="px-[5vw] flex flex-col text-left text-[1rem]">
+                <label for="name" class="py-3 font-bold">Nome*</label>
+
+                <div class="flex justify-center">
+                    <input
+                    type="text"
+                    id="name"
+                    formControlName="name"
+                    placeholder="Nome"
+                    class="p-3 h-[4.5vh] w-[25vw] rounded-lg font-semibold transition duration-200
+                    focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+                    required>
+                </div>
+
+                <div *ngIf="isfieldValid('name')" class="flex items-center px-2 mt-2 text-[#f23333] text-[0.8rem] font-bold">
+                    <h3>Campo obrigatório vázio.</h3>
+                </div>
+
+                <div *ngIf="checkFieldLenght('name')" class="flex items-center px-2 mt-2 text-[#f23333] text-[0.8rem] font-bold">
+                    <h3>O nome precisa ter no mínimo 3 caracteres.</h3>
+                </div>
+            </div>
+
+            <div class="px-[5vw] flex flex-col text-left text-[1rem]">
+                <label for="email" class="py-3 font-bold">E-mail*</label>
+
+                <div class="flex justify-center">
+                    <input
+                    type="text"
+                    id="email"
+                    formControlName="email"
+                    placeholder="E-mail"
+                    class="p-3 h-[4.5vh] w-[25vw] rounded-lg font-semibold transition duration-200
+                    focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+                    required>
+                </div>
+
+                <div *ngIf="isfieldValid('email')" class="flex items-center px-2 mt-2 text-[#f23333] text-[0.8rem] font-bold">
+                    <h3>Campo obrigatório vázio.</h3>
+                </div>
+
+                <div *ngIf="checkEmail('email')" class="flex items-center px-2 mt-2 text-[#f23333] text-[0.8rem] font-bold">
+                    <h3>E-mail inválido.</h3>
+                </div>
+            </div>
+
+            <div class="px-[5vw] flex flex-col text-left">
+                <label for="password" class="py-3 text-[1rem] font-bold">Senha*</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    formControlName="password"
+                    placeholder="Senha"
+                    class="p-3 h-[4.5vh] w-[25vw] rounded-lg font-semibold transition duration-200
+                    focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+                    required>
+
+                <div *ngIf="isfieldValid('password')" class="flex items-center px-2 mt-2 text-[#f23333] text-[0.8rem] font-bold">
+                    <h3>Campo obrigatório vázio.</h3>
+                </div>
+
+                <div *ngIf="checkFieldLenght('password')" class="flex items-center px-2 mt-2 text-[#f23333] text-[0.8rem] font-bold">
+                    <h3>A senha precisa ter no mínimo 6 caracteres.</h3>
+                </div>
+
+                <label for="confirmPassword" class="py-3 text-[1rem] font-bold">Confirmar Senha*</label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    formControlName="confirmPassword"
+                    placeholder="Confirmar Senha"
+                    class="p-3 h-[4.5vh] w-[25vw] mb-4 rounded-lg font-semibold transition duration-200
+                    focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+                    required>
+
+                <div *ngIf="isfieldValid('confirmPassword')" class="flex items-center px-2 text-[#f23333] text-[0.8rem] font-bold">
+                    <h3>Campo obrigatório vazio.</h3>
+                </div>
+
+                <div *ngIf="passwordMatch('password', 'confirmPassword')" class="flex items-center px-2 text-[#f23333] text-[0.8rem] font-bold">
+                    <h3>As senhas são diferentes.</h3>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-[25vw] h-[4.5vh] bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600
+                         mt-[3vh] rounded-lg text-[#ffffff] font-bold">
+                  Criar conta
+                </button>
+
+                <h3 class="font-semibold text-center py-3">
+                    Já possui uma conta?
+                    <a routerLink="/login" class="text-[#7215e6]">Login</a>
+                </h3>
+            </div>
+        </form>
+    </div>
+</main>

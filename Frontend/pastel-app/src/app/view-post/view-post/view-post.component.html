@@ -1,0 +1,60 @@
+<main class="flex flex-col min-h-screen items-center justify-center overflow-y-auto bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-600">
+  <div class="flex justify-center items-center w-full p-[6vh]">
+    <div class="w-[60vw] bg-white text-left rounded-2xl shadow-2xl overflow-hidden shadow-[#000000] border-4 border-[#fffffff]/30 shadow-md">
+
+
+      <div class="flex flex-col w-full bg-gradient-to-br from-[#EEF1F7] via-[#E4E9F2] to-[#D8DFED] border border-white/60 rounded-t-2xl">
+
+        <div class="px-[3vw] pt-[3.5vh] pb-[2.5vh]">
+          <h2 class="font-extrabold text-[2.5rem] leading-snug tracking-tight text-slate-800">
+            {{ post.title }}
+          </h2>
+
+          <p class="mt-2 text-sm tracking-wide text-slate-500">
+            {{post.name_user}}
+          </p>
+
+          <p class="mt-2 text-sm tracking-wide text-slate-500">
+            {{ post.creation_date | date: 'dd/MM/yyyy' }}
+          </p>
+        </div>
+
+        <div class="flex w-[90%] mx-auto gap-4 pb-8">
+          <img
+            *ngFor="let images of post.imageUrls"
+            [src]="images"
+            class="cursor-pointer w-[10vw] h-[20vh] rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-300"
+            alt="Imagem"
+            (click)="openImageFullScreen(images)">
+        </div>
+
+      </div>
+
+
+      <div class="flex flex-col w-full px-[3vw] py-[3vh] text-left text-[1.1rem] text-gray-800 space-y-6">
+
+        <div>
+          <p class="font-bold mb-1">Descrição</p>
+          <p class="py-3 px-4 rounded-xl bg-gray-50 shadow-md text-[1rem] leading-relaxed">
+            {{ post.description }}
+          </p>
+        </div>
+
+        <div>
+          <p class="font-bold mb-1">Categoria</p>
+          <p class="py-3 px-4 rounded-xl bg-gray-50 shadow-md text-[1rem]">
+            {{ post.category }}
+          </p>
+        </div>
+
+        <div>
+          <p class="font-bold mb-1">Conteúdo</p>
+          <p class="py-4 px-5 rounded-xl bg-gray-50 shadow-md text-[1rem] leading-relaxed text-justify">
+            {{ post.content }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>

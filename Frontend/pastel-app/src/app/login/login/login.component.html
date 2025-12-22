@@ -1,0 +1,87 @@
+<main class="flex flex-col min-h-screen w-screen items-start bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-600 overflow-y-auto">
+
+    <div class="flex w-[20vw] justify-center">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+
+    <h1 class="text-[4rem] text-center mt-[2vh] tracking-wide" style="font-family: 'Lato', sans-serif; color: #ffffff;">
+    Pastel
+    </h1>
+    </div>
+
+    <div class="flex justify-center items-center w-full min-h-full">
+        <form
+        [formGroup]="loginForm"
+        (ngSubmit)="loginSubmit()"
+        class="w-[35vw] min-h-[75vh] py-[5vh] bg-white text-center rounded-lg
+               shadow-[#000000] shadow-lg overflow-visible">
+
+            <h2 class="font-bold text-[2.5rem] p-4">Login</h2>
+
+            <h3 class="text-[0.9rem] text-[#000000] p-4 font-semibold">
+                Digite suas credenciais abaixo:
+            </h3>
+
+            <div class="px-[5vw] flex flex-col text-left text-[1rem]">
+                <label for="loginEmail" class="py-4 font-bold">E-mail</label>
+
+                <div class="flex flex-col justify-center">
+                    <input
+                    type="text"
+                    id="loginEmail"
+                    formControlName="email"
+                    placeholder="E-mail"
+                    class="p-3 h-[4.5vh] w-[25vw] bg-transparent rounded-lg font-semibold transition duration-200
+                    focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+                    required>
+
+                    <div
+                    *ngIf="isfieldValid('email')"
+                    class="flex items-center p-2 mt-2 text-[#f23333] text-[0.9rem] font-bold rounded-sm">
+                        <h3>Campo obrigatório vazio.</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-[5vw] flex flex-col text-left">
+                <label for="loginPassword" class="py-4 text-[1rem] font-bold">Senha</label>
+
+                <div class="flex flex-col justify-center">
+                    <input
+                    type="password"
+                    id="loginPassword"
+                    formControlName="password"
+                    placeholder="Senha"
+                    class="p-3 h-[4.5vh] w-[25vw] rounded-lg font-semibold transition duration-200
+                    focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-md shadow-[#896ab0]"
+                    required>
+
+                    <div
+                    *ngIf="isfieldValid('password')"
+                    class="flex items-center p-2 mt-2 text-[#f23333] text-[0.9rem] font-bold rounded-sm">
+                        <h3>Campo obrigatório vazio.</h3>
+                    </div>
+
+                    <div class="hidden flex items-center p-2 mt-4 text-[#f23333] text-[0.9rem] font-bold rounded-sm">
+                        <h3>E-mail ou senha incorretos</h3>
+                    </div>
+
+                    <div class="px-[1vw] py-[2.5vh] text-[0.9rem] text-right font-semibold">
+                        <a routerLink="/login">Esqueceu a senha?</a>
+                    </div>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-[25vw] h-[4.5vh] bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600
+                         mt-2 rounded-lg text-[#ffffff] font-bold">
+                  Continuar
+                </button>
+
+                <h3 class="font-semibold text-center py-8">
+                    Não possui uma conta?
+                    <a routerLink="/register" class="text-[#7215e6]">Registre-se</a>
+                </h3>
+            </div>
+        </form>
+    </div>
+</main>

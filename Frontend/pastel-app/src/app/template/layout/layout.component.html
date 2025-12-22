@@ -1,0 +1,163 @@
+<div class="flex h-screen">
+
+  <aside
+    class="flex flex-col relative top-0 left-0
+    bg-gradient-to-b from-[#2a282e] via-[#312a4a] to-[#372d57]
+    text-white h-full
+    shadow-[4px_0_20px_rgba(0,0,0,0.45)]
+    backdrop-blur-md
+    transition-all duration-300 ease-in-out
+    z-50"
+    [class.w-[28vh]]="expandedNav"
+    [class.w-20]="!expandedNav"
+  >
+
+
+    <button
+      class="flex py-4 px-3 text-violet-300 hover:text-white
+      transition-all duration-300 hover:scale-125"
+      [ngClass]="{
+        'justify-center': !expandedNav,
+        'justify-end w-4 ml-[11vw]': expandedNav
+      }"
+      (click)="toggleSideBar()"
+    >
+      @if(!expandedNav) {
+        <lucide-icon name="circle-arrow-right"></lucide-icon>
+      } @else {
+        <lucide-icon name="circle-arrow-left"></lucide-icon>
+      }
+    </button>
+
+    <nav>
+      <ul class="flex flex-col items-center font-semibold gap-4">
+
+        @if(expandedNav){
+
+        <div class="flex justify-start w-[70%]">
+          <h2
+            class="text-[2.6rem] font-bold mb-[3vh]
+            bg-clip-text text-[#ffffff] tracking-wide"
+          >
+            <a href="">Pastel</a>
+          </h2>
+        </div>
+
+        <a routerLink="posts/search">
+          <li
+            class="flex h-[4.5vh] items-center px-3 w-[25vh] gap-4 rounded-lg
+            transition-all duration-300
+            hover:bg-gradient-to-r from-violet-600/40 via-purple-600/40 to-indigo-600/40
+            hover:shadow-[0_0_12px_rgba(139,92,246,0.4)]
+            hover:pl-5"
+          >
+            <lucide-icon name="search"></lucide-icon>Pesquisar
+          </li>
+        </a>
+
+        <a routerLink="/home">
+          <li
+            class="flex h-[4.5vh] items-center px-3 w-[25vh] gap-4 rounded-lg
+            transition-all duration-300
+            hover:bg-gradient-to-r from-violet-600/40 via-purple-600/40 to-indigo-600/40
+            hover:shadow-[0_0_12px_rgba(139,92,246,0.4)]
+            hover:pl-5"
+          >
+            <lucide-icon name="house"></lucide-icon>Home
+          </li>
+        </a>
+
+        <a routerLink="/posts/create-post">
+          <li class="flex h-[4.5vh] items-center px-3 w-[25vh] gap-4 rounded-lg
+            transition-all duration-300
+            hover:bg-gradient-to-r from-violet-600/40 via-purple-600/40 to-indigo-600/40
+            hover:shadow-[0_0_12px_rgba(139,92,246,0.4)]
+            hover:pl-5">
+            <lucide-icon name="file-plus-corner"></lucide-icon>Novo Post
+          </li>
+        </a>
+
+        <a routerLink="/posts/my-posts">
+          <li class="flex h-[4.5vh] items-center px-3 w-[25vh] gap-4 rounded-lg
+            transition-all duration-300
+            hover:bg-gradient-to-r from-violet-600/40 via-purple-600/40 to-indigo-600/40
+            hover:shadow-[0_0_12px_rgba(139,92,246,0.4)]
+            hover:pl-5">
+            <lucide-icon name="pencil"></lucide-icon>Meus Posts
+          </li>
+        </a>
+
+        <a routerLink="/home">
+          <li class="flex h-[4.5vh] items-center px-3 w-[25vh] gap-4 rounded-lg
+            transition-all duration-300
+            hover:bg-gradient-to-r from-violet-600/40 via-purple-600/40 to-indigo-600/40
+            hover:shadow-[0_0_12px_rgba(139,92,246,0.4)]
+            hover:pl-5">
+            <lucide-icon name="circle-gauge"></lucide-icon>Dashboard
+          </li>
+        </a>
+
+        <div class="w-[80%] h-px bg-white/10 my-2"></div>
+
+        <button
+        (click)="logOut()"
+        >
+          <li class="flex h-[4.5vh] items-center px-3 w-[25vh] gap-4 rounded-lg
+            transition-all duration-300
+            hover:bg-gradient-to-r from-red-500/30 to-red-700/30
+            hover:shadow-[0_0_10px_rgba(239,68,68,0.5)]
+            hover:pl-5">
+            <lucide-icon name="log-out"></lucide-icon>Sair
+          </li>
+        </button>
+
+        } @else {
+
+        <li class="flex h-[4.5vh] w-[5vh] mt-[8vh] items-center justify-center rounded-lg
+          transition-all duration-300 hover:bg-gradient-to-r from-violet-600/40 to-indigo-600/40 hover:scale-110">
+          <a routerLink="posts/search"><lucide-icon name="search"></lucide-icon></a>
+        </li>
+
+        <li class="flex h-[4.5vh] w-[5vh] items-center justify-center rounded-lg
+          transition-all duration-300 hover:bg-gradient-to-r from-violet-600/40 to-indigo-600/40 hover:scale-110">
+          <a routerLink="/home"><lucide-icon name="house"></lucide-icon></a>
+        </li>
+
+        <li class="flex h-[4.5vh] w-[5vh] items-center justify-center rounded-lg
+          transition-all duration-300 hover:bg-gradient-to-r from-violet-600/40 to-indigo-600/40 hover:scale-110">
+          <a routerLink="/posts/create-post"><lucide-icon name="file-plus-corner"></lucide-icon></a>
+        </li>
+
+        <li class="flex h-[4.5vh] w-[5vh] items-center justify-center rounded-lg
+          transition-all duration-300 hover:bg-gradient-to-r from-violet-600/40 to-indigo-600/40 hover:scale-110">
+          <a routerLink="/posts/my-posts"><lucide-icon name="pencil"></lucide-icon></a>
+        </li>
+
+        <li class="flex h-[4.5vh] w-[5vh] items-center justify-center rounded-lg
+          transition-all duration-300 hover:bg-gradient-to-r from-violet-600/40 to-indigo-600/40 hover:scale-110">
+          <a routerLink="/home"><lucide-icon name="circle-gauge"></lucide-icon></a>
+        </li>
+
+        <li class="flex h-[4.5vh] w-[5vh] items-center justify-center rounded-lg
+          transition-all duration-300 hover:bg-gradient-to-r from-red-500/40 to-red-700/40 hover:scale-110">
+          <button
+          (click)="logOut()"
+          >
+          <lucide-icon name="log-out"></lucide-icon></button>
+        </li>
+
+        }
+
+      </ul>
+    </nav>
+  </aside>
+
+
+  <main
+    class="flex-1 min-h-0 overflow-y-auto transition-all duration-300"
+    [ngClass]="{ 'backdrop-blur-lg bg-black/40': expandedNav }"
+  >
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

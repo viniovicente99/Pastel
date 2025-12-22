@@ -1,0 +1,82 @@
+<main class="flex flex-col min-h-screen items-center overflow-y-auto bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600">
+    
+    <div
+    class="flex justify-start w-[80%] border-b-2 border-[#ffffff]">
+    <h1
+    class="font-bold text-[2rem] py-2 text-[#ffffff] mt-[4vh] tracking-wide">Meus Posts</h1>
+    </div>
+
+
+    <div
+    *ngIf="posts.length === 0 "
+    class="flex w-full h-[70vh] justify-center items-center gap-4">
+    <lucide-icon class="h-[10vw] w-[4vw] text-[#ffffff]" name="file-question-mark"></lucide-icon>   
+    <h2
+    class="text-[1.5rem] text-[#ffffff] tracking-wide">Nenhum Post para mostrar...</h2>
+    
+    </div>
+
+    <div
+    *ngIf="posts.length > 0 "        
+    class="justify-start flex flex-wrap gap-8 w-[80%] shadow-[#46115e] py-10 ">
+        
+        
+        <div
+        
+        *ngFor="let post of posts; let i = index" class="flex flex-col relative w-[240px] h-[220px] text-left bg-white rounded-lg shadow-[#000000] shadow-lg hover:scale-105 transition duration-300">
+            <a [routerLink]="['/posts/edit', post.id]">
+            <button type="button" class="absolute top-2 right-12 w-8 h-8 flex items-center justify-center bg-black bg-opacity-50 rounded-full hover:scale-110 transition duration-300  p-1 z-1">
+                <lucide-icon name="pencil" class="w-5 h-5 text-white"></lucide-icon>
+            </button>
+            </a>
+
+            <button
+            (click)="deletePost(post.id, i)"
+            type="button" class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-black bg-opacity-50 rounded-full hover:scale-110 transition duration-300  p-1 z-1">
+                <lucide-icon name="trash-2" class="w-5 h-5 text-red-500"></lucide-icon>
+            </button>
+
+           
+            <img
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+                [src]="(post?.imageUrls ?? [])[0] || 'https://i.ibb.co/RGbkbXdd/placeholder-png.png'"
+                class="w-[100%] h-[50%] object-cover rounded-t-lg "
+                alt="Imagem do Post">  
+            
+            
+            <div class="flex flex-col">
+            
+            <h2
+            title="{{ post.title }}"
+            class="px-4 font-semibold text-[1.1rem] mt-[0.7vh] w-full truncate">{{ post.title }}</h2>
+
+            
+            <p
+            title="{{ post.description }}"
+            class="px-4 w-full text-left text-[0.8rem] truncate">{{ post.description }}</p>
+
+            </div>
+
+            <div class="flex  w-full justify-end items-center px-3 gap-20 ">
+                
+            <button type="button" class="absolute bottom-2 left-2 w-fuil h-10 flex text-[0.8rem] hover:text-violet-700 items-center p-1 z-1">
+            <a [routerLink]="['/posts/view', post.id]">
+            Ver detalhes
+            </a>
+            </button>
+            
+           <p
+            title="{{ post.category }}"
+            class="inline-block mt-[1vh] w-[7vw] p-2 bg-gradient-to-r  from-violet-600 via-purple-600 to-indigo-600 rounded-lg font-extrabold text-[0.7rem] text-white truncate text-center overflow-hidden whitespace-nowrap">
+            {{ post.category }}
+            </p>
+            
+        </div>
+        
+    </div>
+
+    </div>
+            
+</main>

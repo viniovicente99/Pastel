@@ -1,0 +1,92 @@
+<main class="flex flex-col min-h-screen items-center overflow-y-auto bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600">
+    
+    <div
+    class="flex justify-start w-[80%] border-b-2 border-[#ffffff]">
+    <h1
+    class="font-bold text-[2rem] py-2 text-[#ffffff] mt-[4vh] tracking-wide">Pesquisar</h1>
+    </div>
+
+    <div
+    class="flex justify-start items-center w-[80%] mt-[3vh] gap-4 h-[5vh]">
+    <input
+    [(ngModel)]="searchTerm"
+    type="text"
+    id="search"
+    placeholder="Buscar Post..."
+    class="search pl-5 py-4 h-[3.5vh] w-[55%] bg-[#ffffff] rounded-lg font-bold transition duration-200
+    focus:ring-2 focus:ring-[#8086c2] focus:outline-none shadow-lg shadow-[#896ab0]"
+    >
+
+    <button name="search"
+    (click)="SearchPost(searchTerm)"
+    [disabled]="searchTerm.length === 0"
+    class="disabled:cursor-not-allowed "> 
+    <lucide-icon name="search" 
+    class="text-[#ffffff] hover:scale-110 transition duration-300 hover:text-violet-400 h-[45px] w-[40px]"></lucide-icon>
+    </button>
+    </div>
+
+
+    <div
+    *ngIf="posts.length === 0 "
+    class="flex w-full h-[70vh] justify-center items-center gap-4">
+    <lucide-icon class="h-[10vw] w-[4vw] text-[#ffffff]" name="file-question-mark"></lucide-icon>   
+    <h2
+    class="text-[1.5rem] text-[#ffffff] tracking-wide">Os Posts aparecerão aqui...</h2>
+    
+    </div>
+
+    <div
+    *ngIf="posts.length > 0 "        
+    class="justify-start flex flex-wrap gap-8 w-[80%] shadow-[#46115e] py-10 ">
+        
+        
+        <div
+        
+        *ngFor="let post of posts; let i = index" class="flex flex-col relative w-[240px] h-[220px] text-left bg-white rounded-lg shadow-[#000000] shadow-lg hover:scale-105 transition duration-300">
+           
+            <img
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+                [src]="(post?.imageUrls ?? [])[0] || 'https://i.ibb.co/RGbkbXdd/placeholder-png.png'"
+                class="w-[100%] h-[50%] object-cover rounded-t-lg "
+                alt="Imagem do Post">  
+            
+            
+            <div class="flex flex-col">
+            
+            <h2
+            title="{{ post.title }}"
+            class="px-4 font-semibold text-[1.1rem] mt-[0.7vh] w-full truncate">{{ post.title }}</h2>
+
+            
+            <p
+            title="{{ post.description }}"
+            class="px-4 w-full text-left text-[0.8rem] truncate">{{ post.description }}</p>
+
+            </div>
+
+            <div class="flex  w-full justify-end items-center px-3 gap-20 ">
+                
+            <button type="button" class="absolute bottom-2 left-2 w-fuil h-10 flex text-[0.8rem] hover:text-violet-700 items-center p-1 z-1">
+            <a
+            target="_blank"
+            [routerLink]="['/posts/view', post.id]">
+            Ver detalhes
+            </a>
+            </button>
+            
+           <p
+            title="{{ post.category }}"
+            class="inline-block mt-[1vh] w-[7vw] p-2 bg-gradient-to-r  from-violet-600 via-purple-600 to-indigo-600 rounded-lg font-extrabold text-[0.7rem] text-white truncate text-center overflow-hidden whitespace-nowrap">
+            {{ post.category }}
+            </p>
+            
+        </div>
+        
+    </div>
+
+    </div>
+            
+</main>
