@@ -2,6 +2,9 @@ import express from 'express';
 import userRoutes from './routes/user.routes.js';
 import postRoutes from './routes/post.routes.js';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
